@@ -552,7 +552,7 @@ npm install
 
 ## 👤 Author
 
-**Your Name**
+**Hrithik Doiphode**
 - GitHub: https://github.com/Hrithikdoi
 - Email: hrithikdoi1@gmail.com
 - LinkedIn: https://www.linkedin.com/in/hrithik-doiphode/
