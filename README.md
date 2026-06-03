@@ -304,8 +304,6 @@ POST /leads
 
 ## 🚀 Deployment
 
-## 🚀 Deployment
-
 ### Live Demo
 
 Frontend:
