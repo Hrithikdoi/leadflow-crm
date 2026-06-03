@@ -304,7 +304,7 @@ POST /leads
 
 ## 🚀 Deployment
 
-### Option 1: Render (Backend) + Vercel (Frontend)
+### Render (Backend) + Vercel (Frontend)
 
 **Backend Deployment to Render:**
 1. Create account at [render.com](https://render.com)
@@ -335,7 +335,6 @@ POST /leads
 **Backend:**
 ```bash
 npm start          # Start development server
-npm run test       # Run tests
 ```
 
 **Frontend:**
@@ -382,15 +381,6 @@ leadflow-crm/crm-app/
 
 ## 🐛 Troubleshooting
 
-### MongoDB Connection Issues
-```bash
-# Ensure MongoDB is running
-mongosh
-
-# Check port
-netstat -an | grep 27017
-```
-
 ### Port Already in Use
 ```bash
 # Windows
@@ -417,11 +407,6 @@ npm install
 - GitHub: https://github.com/Hrithikdoi
 - Email: hrithikdoi1@gmail.com
 - LinkedIn: https://www.linkedin.com/in/hrithik-doiphode/
-
-### Acknowledgments
-- React & Vite communities
-- MongoDB documentation
-- Tailwind CSS team
 
 ---
 
