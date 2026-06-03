@@ -327,14 +327,17 @@ https://leadflow-crm-backend-mnov.onrender.com/health
 2. Connect GitHub repository
 3. Set Root Directory: `backend`
 4. Build Command:
+
    ```bash
    npm install
    ```
 5. Start Command:
+
    ```bash
    npm start
    ```
 6. Add Environment Variables:
+
    ```env
    NODE_ENV=production
    PORT=10000
@@ -349,14 +352,17 @@ https://leadflow-crm-backend-mnov.onrender.com/health
 2. Connect GitHub repository
 3. Set Root Directory: `frontend`
 4. Build Command:
+
    ```bash
    npm install && npm run build
    ```
 5. Publish Directory:
+
    ```bash
    dist
    ```
 6. Add Environment Variable:
+
    ```env
    VITE_API_URL=https://leadflow-crm-backend-mnov.onrender.com/api
    ```
