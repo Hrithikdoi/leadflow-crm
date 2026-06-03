@@ -3,7 +3,6 @@
 > A modern, full-stack Customer Relationship Management (CRM) application built with React, Node.js, and MongoDB. Streamline your lead management, track customer interactions, and boost your sales pipeline efficiency.
 
 ![Status](https://img.shields.io/badge/status-active-success)
-![License](https://img.shields.io/badge/license-MIT-blue)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D20.0-brightgreen)
 
 ---
@@ -117,7 +116,7 @@ Before you begin, ensure you have the following installed:
 
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/yourusername/leadflow-crm.git
+git clone https://github.com/Hrithikdoi/leadflow-crm.git
 cd leadflow-crm/crm-app
 ```
 
