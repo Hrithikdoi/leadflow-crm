@@ -550,18 +550,12 @@ npm install
 
 ---
 
-## 📝 License
-
-MIT License - feel free to use this project for personal and commercial purposes.
-
----
-
 ## 👤 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-- LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
+- GitHub: https://github.com/Hrithikdoi
+- Email: hrithikdoi1@gmail.com
+- LinkedIn: https://www.linkedin.com/in/hrithik-doiphode/
 
 ### Acknowledgments
 - React & Vite communities
