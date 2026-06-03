@@ -1,6 +1,6 @@
 # LeadFlow CRM
 
-> A modern, full-stack Customer Relationship Management (CRM) application built with React, Node.js, and MongoDB. Streamline your lead management, track customer interactions, and boost your sales pipeline efficiency.
+> A full-stack Lead Management CRM built with React, Node.js, Express.js, and MongoDB. Manage leads, track customer interactions, monitor lead status, and streamline your sales pipeline.
 
 ![Status](https://img.shields.io/badge/status-active-success)
 ![Node Version](https://img.shields.io/badge/node-%3E%3D20.0-brightgreen)
@@ -32,15 +32,14 @@
 - Track lead statistics and conversion metrics
 - Manage lead information with a user-friendly interface
 
-The application features a responsive web interface built with modern web technologies, a robust REST API backend, and real-time data synchronization.
-
+The application features a responsive user interface, RESTful API architecture, MongoDB database integration, lead analytics dashboard, and complete CRUD functionality for efficient lead management.
 ---
 
 ## ✨ Features
 
 ### Lead Management
 - ✅ **Create Leads** - Add new prospects with comprehensive information
-- ✅ **View All Leads** - Display leads with pagination and sorting
+- ✅ **View All Leads** - Display all leads in a centralized dashboard
 - ✅ **Edit Leads** - Update lead details and status
 - ✅ **Delete Leads** - Remove leads from the system
 - ✅ **Lead Search** - Real-time search across lead names, emails, and companies
@@ -54,7 +53,7 @@ The application features a responsive web interface built with modern web techno
 ### Analytics & Insights
 - 📈 **Dashboard Statistics** - View lead count by status
 - 📊 **Conversion Metrics** - Track sales pipeline health
-- 📉 **Real-time Updates** - Instant data refresh after actions
+- 📉 **Dynamic Dashboard Updates** - Automatically refreshes data after CRUD operations
 
 ### User Experience
 - 🌓 **Dark Mode** - Toggle between light and dark themes
@@ -100,8 +99,9 @@ The application features a responsive web interface built with modern web techno
 |------|---------|
 | **npm** | Package management |
 | **Git** | Version control |
+| **MongoDB Atlas** | Cloud database hosting |
 | **Render** | Cloud deployment |
-| **Vercel** | Frontend deployment (optional) |
+| **Vercel** | Frontend deployment |
 
 ---
 
@@ -132,18 +132,9 @@ cd ../frontend
 npm install
 ```
 
-### Step 4: Create Environment Files
-Create a `.env` file in the `backend` directory:
-```bash
-cd ../backend
-# Create .env file (see Environment Variables section)
-```
+### Step 4: Configure Environment Variables
 
-Create a `.env` file in the `frontend` directory:
-```bash
-cd ../frontend
-# Create .env file (see Environment Variables section)
-```
+Create `.env` files in both the backend and frontend directories using the examples provided in the Environment Variables section below.
 
 ### Step 5: Start MongoDB
 Ensure MongoDB is running on your system:
@@ -214,11 +205,6 @@ MONGO_URI=mongodb://localhost:27017/crm_db
 
 # CORS Configuration
 FRONTEND_URL=http://localhost:5173
-
-# Optional: For production deployment
-# NODE_ENV=production
-# MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/crm_db
-# FRONTEND_URL=https://yourdomain.com
 ```
 
 **Environment Variable Descriptions:**
@@ -227,7 +213,7 @@ FRONTEND_URL=http://localhost:5173
 |----------|---------|-------------|
 | `PORT` | 5000 | Port where Express server runs |
 | `NODE_ENV` | development | Application environment (development/production) |
-| `MONGO_URI` | localhost | MongoDB connection string |
+| `MONGO_URI` | mongodb://localhost:27017/crm_db | MongoDB connection string |
 | `FRONTEND_URL` | http://localhost:5173 | Frontend URL for CORS configuration |
 
 ### Frontend (`frontend/.env`)
@@ -245,169 +231,74 @@ VITE_API_URL=http://localhost:5000/api
 
 ### Development vs Production
 
-**Development Mode:**
-- CORS: Flexible (allows all localhost ports)
-- Database: Local MongoDB instance
-- Frontend: Hot reload enabled (port 5173)
+### Development vs Production
 
-**Production Mode:**
-- CORS: Strict (only specified FRONTEND_URL)
-- Database: MongoDB Atlas or production instance
-- Frontend: Static build (Vercel or similar)
+**Development**
+- Local MongoDB
+- Frontend: http://localhost:5173
+- Backend: http://localhost:5000
+
+**Production**
+- MongoDB Atlas
+- Frontend deployed on Vercel
+- Backend deployed on Render
 
 ---
 
 ## 🔌 API Endpoints
 
 ### Base URL
-```
+
 http://localhost:5000/api
-```
 
 ### Lead Endpoints
 
-#### Get All Leads
-```http
-GET /leads?page=1&limit=10&status=&search=&sortBy=createdAt&order=desc
-```
+| Method | Endpoint | Description |
+|----------|----------|----------|
+| GET | /leads | Get all leads |
+| GET | /leads/search | Search leads |
+| GET | /leads/stats | Get lead statistics |
+| GET | /leads/:id | Get a single lead |
+| POST | /leads | Create a new lead |
+| PUT | /leads/:id | Update a lead |
+| DELETE | /leads/:id | Delete a lead |
 
-**Query Parameters:**
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `page` | number | Page number (default: 1) |
-| `limit` | number | Records per page (default: 10) |
-| `status` | string | Filter by status (New, Contacted, Qualified, Converted, Lost) |
-| `search` | string | Search query (name, email, company) |
-| `sortBy` | string | Sort field (createdAt, name, email, status) |
-| `order` | string | Sort order (asc, desc) |
+### Example Create Lead Request
 
-**Response:**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "_id": "507f1f77bcf86cd799439011",
-      "name": "John Doe",
-      "email": "john@example.com",
-      "phone": "(555) 123-4567",
-      "company": "Tech Corp",
-      "status": "New",
-      "notes": "Interested in enterprise plan",
-      "createdAt": "2024-01-15T10:30:00Z",
-      "updatedAt": "2024-01-15T10:30:00Z"
-    }
-  ],
-  "pagination": {
-    "currentPage": 1,
-    "totalPages": 5,
-    "totalRecords": 50
-  }
-}
-```
-
-#### Search Leads
-```http
-GET /leads/search?q=john&status=New&page=1&limit=10
-```
-
-**Query Parameters:**
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `q` | string | Search query |
-| `status` | string | Filter by status (optional) |
-| `page` | number | Page number |
-| `limit` | number | Records per page |
-
-#### Get Lead Statistics
-```http
-GET /leads/stats
-```
-
-**Response:**
-```json
-{
-  "success": true,
-  "data": {
-    "total": 50,
-    "byStatus": {
-      "New": 15,
-      "Contacted": 12,
-      "Qualified": 10,
-      "Converted": 8,
-      "Lost": 5
-    }
-  }
-}
-```
-
-#### Get Single Lead
-```http
-GET /leads/:id
-```
-
-#### Create Lead
-```http
 POST /leads
-Content-Type: application/json
 
 {
   "name": "John Doe",
   "email": "john@example.com",
-  "phone": "(555) 123-4567",
+  "phone": "9876543210",
   "company": "Tech Corp",
   "status": "New",
   "notes": "Interested in enterprise plan"
 }
-```
-
-**Validation Rules:**
-- `name`: Required, string, 2-100 characters
-- `email`: Required, valid email format, unique
-- `phone`: Required, string, 10-20 characters
-- `company`: Required, string, 2-100 characters
-- `status`: Required, enum (New, Contacted, Qualified, Converted, Lost)
-- `notes`: Optional, string, max 500 characters
-
-#### Update Lead
-```http
-PUT /leads/:id
-Content-Type: application/json
-
-{
-  "status": "Contacted",
-  "notes": "Called - interested in demo"
-}
-```
-
-#### Delete Lead
-```http
-DELETE /leads/:id
-```
 
 ---
 
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](./screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.png)
 *The main dashboard displays lead statistics, charts, and recent activity*
 
 ### Leads Table
-![Leads Table](./screenshots/leads-table.png)
+![Leads Table](screenshots/leads-table.png)
 *View all leads with pagination, filtering, and search functionality*
 
 ### Create Lead Modal
-![Create Lead](./screenshots/create-lead.png)
+![Create Lead](screenshots/create-lead.png)
 *Modal form for adding new leads with validation*
 
 ### Lead Filters
-![Filters](./screenshots/filters.png)
+![Filters](screenshots/filters.png)
 *Advanced filtering by status and other criteria*
 
-### Dark Mode
-![Dark Mode](./screenshots/dark-mode.png)
-*Professional dark theme for reduced eye strain*
+### Light Mode
+![Light Mode](screenshots/light-mode.png)
+*Clean and responsive light theme interface*
 
 ---
 
@@ -434,35 +325,6 @@ DELETE /leads/:id
 3. Set Framework: Vite
 4. Add Environment: `VITE_API_URL=https://your-backend.onrender.com/api`
 5. Deploy
-
-### Option 2: Docker
-
-**Dockerfile:**
-```dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY backend/package*.json ./backend/
-RUN cd backend && npm install
-COPY backend ./backend
-EXPOSE 5000
-CMD ["node", "backend/server.js"]
-```
-
-**Build and Run:**
-```bash
-docker build -t leadflow-crm .
-docker run -p 5000:5000 --env-file .env leadflow-crm
-```
-
-### Option 3: Traditional VPS
-
-1. SSH into server
-2. Install Node.js and MongoDB
-3. Clone repository
-4. Install dependencies
-5. Set up PM2 for process management
-6. Configure Nginx reverse proxy
-7. Set up SSL with Let's Encrypt
 
 ---
 
@@ -564,4 +426,4 @@ npm install
 ---
 
 **Version:** 1.0.0  
-**Last Updated:** June 2024
+**Last Updated:** June 2026
