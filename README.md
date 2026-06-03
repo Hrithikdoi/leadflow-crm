@@ -304,29 +304,67 @@ POST /leads
 
 ## 🚀 Deployment
 
-### Render (Backend) + Vercel (Frontend)
+## 🚀 Deployment
 
-**Backend Deployment to Render:**
-1. Create account at [render.com](https://render.com)
-2. Create new Web Service
-3. Connect GitHub repository
-4. Set Start Command: `npm start`
-5. Add Environment Variables:
-   ```
-   NODE_ENV=production
-   MONGO_URI=mongodb+srv://...
-   FRONTEND_URL=https://your-frontend.vercel.app
-   ```
-6. Deploy
+### Live Demo
 
-**Frontend Deployment to Vercel:**
-1. Create account at [vercel.com](https://vercel.com)
-2. Import project from GitHub
-3. Set Framework: Vite
-4. Add Environment: `VITE_API_URL=https://your-backend.onrender.com/api`
-5. Deploy
+Frontend:
+https://leadflow-crm-euuf.onrender.com
+
+Backend:
+https://leadflow-crm-backend-mnov.onrender.com
+
+Health Check:
+https://leadflow-crm-backend-mnov.onrender.com/health
 
 ---
+
+### Render Deployment
+
+#### Backend Deployment (Render Web Service)
+
+1. Create a new Web Service on Render
+2. Connect GitHub repository
+3. Set Root Directory: `backend`
+4. Build Command:
+   ```bash
+   npm install
+   ```
+5. Start Command:
+   ```bash
+   npm start
+   ```
+6. Add Environment Variables:
+   ```env
+   NODE_ENV=production
+   PORT=10000
+   MONGO_URI=<your-mongodb-atlas-uri>
+   FRONTEND_URL=https://leadflow-crm-euuf.onrender.com
+   ```
+7. Deploy
+
+#### Frontend Deployment (Render Static Site)
+
+1. Create a new Static Site on Render
+2. Connect GitHub repository
+3. Set Root Directory: `frontend`
+4. Build Command:
+   ```bash
+   npm install && npm run build
+   ```
+5. Publish Directory:
+   ```bash
+   dist
+   ```
+6. Add Environment Variable:
+   ```env
+   VITE_API_URL=https://leadflow-crm-backend-mnov.onrender.com/api
+   ```
+7. Deploy
+
+#### Database
+
+MongoDB Atlas is used as the cloud database.
 
 ## 💻 Development
 
